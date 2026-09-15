@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资源导航</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0A1F1B;
+    --bg-panel:#102A24;
+    --bg-panel-2:#12322A;
+    --jade:#3C8C74;
+    --jade-soft:#245344;
+    --cyan:#5FD8C0;
+    --text-primary:#E7F3EE;
+    --text-muted:#7FA396;
+    --divider:#1D3A32;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html,body{
+    background:var(--bg-deep);
+    color:var(--text-primary);
+    font-family:"Noto Sans SC","Noto Serif SC",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:52px 20px 60px;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(560px 420px at 15% -5%, rgba(60,140,116,0.16), transparent 60%),
+      radial-gradient(480px 380px at 100% 20%, rgba(95,216,192,0.08), transparent 60%);
+    pointer-events:none;
+  }
+
+  .page{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:440px;
+  }
+
+  /* ---------- Header ---------- */
+  .header{
+    text-align:center;
+    margin-bottom:34px;
+    animation:rise .6s cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(12px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .header, .link-item{ animation:none !important; }
+  }
+
+  .avatar{
+    width:76px;
+    height:76px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    background:linear-gradient(155deg, var(--jade) 0%, var(--bg-panel-2) 70%);
+    border:1px solid var(--jade-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:"Noto Serif SC";
+    font-size:26px;
+    font-weight:600;
+    color:var(--cyan);
+  }
+
+  .brand-name{
+    font-family:"Noto Serif SC";
+    font-weight:700;
+    font-size:24px;
+    letter-spacing:.02em;
+    margin-bottom:8px;
+  }
+
+  .brand-note{
+    font-size:13px;
+    color:var(--text-muted);
+    line-height:1.8;
+    max-width:320px;
+    margin:0 auto;
+  }
+
+  /* ---------- Notice strip ---------- */
+  .notice{
+    margin-top:20px;
+    padding:12px 16px;
+    background:rgba(95,216,192,0.06);
+    border:1px solid var(--jade-soft);
+    border-radius:10px;
+    font-size:12.5px;
+    color:var(--text-muted);
+    line-height:1.7;
+    text-align:left;
+  }
+
+  /* ---------- Category groups ---------- */
+  .group{
+    margin-top:32px;
+    animation:rise .6s cubic-bezier(.2,.8,.2,1) both;
+    animation-delay:.08s;
+  }
+
+  .group-title{
+    font-size:12.5px;
+    color:var(--text-muted);
+    letter-spacing:.1em;
+    margin-bottom:12px;
+    padding-left:4px;
+  }
+
+  .link-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .link-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px 16px;
+    background:var(--bg-panel);
+    border:1px solid var(--divider);
+    border-radius:14px;
+    text-decoration:none;
+    color:var(--text-primary);
+    transition:border-color .2s ease, background .2s ease, transform .15s ease;
+  }
+
+  .link-item:hover{
+    border-color:var(--jade);
+    background:var(--bg-panel-2);
+  }
+
+  .link-item:active{
+    transform:scale(0.98);
+  }
+
+  .link-item:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:2px;
+  }
+
+  .link-icon{
+    width:38px;
+    height:38px;
+    flex:none;
+    border-radius:10px;
+    background:rgba(95,216,192,0.08);
+    border:1px solid var(--jade-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    color:var(--cyan);
+  }
+
+  .link-text{
+    flex:1;
+    min-width:0;
+  }
+
+  .link-name{
+    font-size:15px;
+    font-weight:500;
+    margin-bottom:2px;
+  }
+
+  .link-sub{
+    font-size:12px;
+    color:var(--text-muted);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .link-count{
+    flex:none;
+    font-size:11.5px;
+    color:var(--text-muted);
+    background:var(--bg-deep);
+    border:1px solid var(--divider);
+    padding:4px 9px;
+    border-radius:999px;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer{
+    margin-top:40px;
+    text-align:center;
+    font-size:11.5px;
+    color:var(--text-muted);
+    line-height:1.8;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <div class="avatar">资</div>
+    <div class="brand-name">资源导航</div>
+    <p class="brand-note">整理常用资源合集，点击即可跳转查看，建议转存后保留几天以防失效。</p>
+    <div class="notice">
+      资源随时更新，建议下载 / 转存后不要立即删除，方便二次查看。
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">软件工具</div>
+    <div class="link-list">
+
+      <a class="link-item" href="#" target="_blank" rel="noopener">
+        <div class="link-icon">01</div>
+        <div class="link-text">
+          <div class="link-name">编程学习软件合集</div>
+          <div class="link-sub">网盘链接 · 持续更新</div>
+        </div>
+        <span class="link-count">热门</span>
+      </a>
+
+      <a class="link-item" href="#" target="_blank" rel="noopener">
+        <div class="link-icon">02</div>
+        <div class="link-text">
+          <div class="link-name">实时变声器工具</div>
+          <div class="link-sub">网盘链接</div>
+        </div>
+        <span class="link-count">新增</span>
+      </a>
+
+      <a class="link-item" href="#" target="_blank" rel="noopener">
+        <div class="link-icon">03</div>
+        <div class="link-text">
+          <div class="link-name">流光助手</div>
+          <div class="link-sub">网盘链接</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">影音 · 资料</div>
+    <div class="link-list">
+
+      <a class="link-item" href="#" target="_blank" rel="noopener">
+        <div class="link-icon">04</div>
+        <div class="link-text">
+          <div class="link-name">资料合集 A</div>
+          <div class="link-sub">网盘链接</div>
+        </div>
+      </a>
+
+      <a class="link-item" href="#" target="_blank" rel="noopener">
+        <div class="link-icon">05</div>
+        <div class="link-text">
+          <div class="link-name">资料合集 B</div>
+          <div class="link-sub">网盘链接</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    页面持续更新维护 · 感谢支持
+  </div>
+
+</div>
+
+</body>
+</html>
